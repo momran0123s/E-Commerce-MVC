@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<Product>
+
+@if (Model != null)
+{
+    foreach (var product in Model)
+    {
+        <div>
+            <h4>@product.ProductName</h4>
+            <p>@product.Description</p>
+            <p>@product.Price</p>
+            <a asp-controller="Product" asp-action="AddToCart" asp-route-id="@product.Id">Add to Cart</a>
+        </div>
+    }
+}
+else
+{
+    <p>No products available.</p>
+}
