@@ -14,7 +14,7 @@ namespace E_Commerce.Models
         public decimal Price { get; set; }
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        public virtual Category? Category { get; set; }
         public virtual CartItems? CartItems { get; set; }
         public virtual OrderItems? OrderItems { get; set; }
     }
