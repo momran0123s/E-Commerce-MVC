@@ -4,18 +4,70 @@
 @{
 }
 @model List<Product>
+<style>
+
+    .product-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-radius: 20px;
+  
+}
+.mine{
+   height:300px;
+  border-radius:12px;
+  margin-bottom:10px ;
+  transition: transform 0.7s ease;
+}
+
+ .mine:hover {
+            transform: scale(1.1);
+        }
+.product-card {
+  width: 300px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 12px;
+        transition: box-shadow 0.7s ease;
+}
+
+        .product-card:hover {
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5); 
+        }
+
+.product-details {
+  background-color: white;
+}
+
+/* .Content{
+  min-height: 300px;
+  
+} */
+</style>
+<h1 class="mt-5 mb-3 d-flex justify-content-center">Products</h1>
 
 @if (Model != null)
-{
-    foreach (var product in Model)
+{<div class="product-container mb-5">
+    @foreach (var product in Model)
     {
-        <div>
-            <h4>@product.ProductName</h4>
-            <p>@product.Description</p>
-            <p>@product.Price</p>
-            <a asp-controller="Product" asp-action="AddToCart" asp-route-id="@product.Id">Add to Cart</a>
-        </div>
-    }
+        
+            <div class="product-card text-center">
+                <div class="product-details" >
+                    <img src="@product.Image" alt="" class="w-100 mine">
+                    <div class="Content">
+                        <h3>@product.ProductName</h3>
+                        <p class="myP">@product.Description</p>
+                        <p>Price: <strong>@product.Price L.E</strong></p>
+                        <a asp-controller="Product" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-outline-dark">Add to Cart</a>
+
+                    </div>               
+                </div>
+            </div>
+       
+       
+    } 
+    </div>
 }
 else
 {

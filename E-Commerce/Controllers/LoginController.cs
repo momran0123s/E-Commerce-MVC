@@ -37,7 +37,7 @@ namespace E_Commerce.Controllers
                     if (found)
                     {
                        await signInManager.SignInAsync(user, isPersistent: loginVM.IsPresistent);
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Product");
                     }
                 }
                 ModelState.AddModelError("", "Invalid Username or password");
@@ -50,7 +50,7 @@ namespace E_Commerce.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Login");
         }
     }
 }
