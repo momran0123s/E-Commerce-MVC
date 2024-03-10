@@ -42,12 +42,7 @@ namespace E_Commerce.Controllers
                 IdentityResult result = await userManager.CreateAsync(user, registerVM.Password);
                 if (result.Succeeded)
                 {
-                    //Cart cart = new Cart()
-                    //{
-                    //    UserId = user.Id,
-                    //};
-                    //db.Carts.Add(cart);
-                    //db.SaveChanges();
+                    //await userManager.AddToRoleAsync(user, "Admin");
                     return RedirectToAction("Login", "Login");
                 }
                 foreach(var error in result.Errors)
