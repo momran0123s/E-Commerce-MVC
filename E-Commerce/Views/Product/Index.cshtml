@@ -40,12 +40,16 @@
   background-color: white;
 }
 
+
 /* .Content{
   min-height: 300px;
   
 } */
 </style>
+<div id="cart-message" ></div>
 <h1 class="mt-5 mb-3 d-flex justify-content-center">Products</h1>
+
+
 
 @if (Model != null)
 {<div class="product-container mb-5">
@@ -59,17 +63,63 @@
                         <h3>@product.ProductName</h3>
                         <p class="myP">@product.Description</p>
                         <p>Price: <strong>@product.Price L.E</strong></p>
-                        <a asp-controller="Product" asp-action="AddToCart" asp-route-id="@product.Id" class="btn btn-outline-dark">Add to Cart</a>
-
-                    </div>               
+                        <button class="btn btn-outline-dark add-to-cart-btn" data-product-id="@product.Id">Add to Cart</button>
+                </div>               
                 </div>
             </div>
        
        
     } 
+       
     </div>
 }
 else
 {
     <p>No products available.</p>
+}
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".add-to-cart-btn").click(function (e) {
+                e.preventDefault();
+                var productId = $(this).data("product-id");
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Product/AddToCart",
+                    data: { id: productId },
+                    success: function () {
+                        displayCartMessage("Product added to cart successfully!", "success");
+                    },
+                    error: function () {
+                        displayCartMessage("Failed to add product to cart.", "danger");
+                    }
+                });
+            });
+
+            function displayCartMessage(message, type) {
+                var alertClass = type === "success" ? "alert-success" : "alert-danger";
+                var cartMessage = $("<div>").addClass("alert " + alertClass).text(message);
+                cartMessage.css({
+                    "position": "fixed",
+                    "top": "20px",
+                    "right": "20px",
+                    "z-index": "9999",
+                    "width": "250px",
+                    "text-align": "center"
+                });
+
+                $("#cart-message").empty().append(cartMessage);
+
+                // Make the message disappear after 3 seconds
+                setTimeout(function () {
+                    cartMessage.fadeOut("slow", function () {
+                        $(this).remove();
+                    });
+                }, 3000);
+            }
+        });
+    </script>
+
+
 }

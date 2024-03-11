@@ -56,13 +56,23 @@ namespace E_Commerce.Controllers
             CartItems items = db.CartItems.SingleOrDefault(x=>x.Id == id);
             if (items != null)
             {
-                db.CartItems.Remove(items);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (items.ProductQuantity > 1)
+                {
+                    
+                    items.ProductQuantity-= 1;
+                    db.CartItems.Update(items);
+                }
+                else
+                {
+                    db.CartItems.Remove(items);
+                }
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
             }
             else
             {
-                return Content("no more");
+                return BadRequest();
             }
         }
     }
