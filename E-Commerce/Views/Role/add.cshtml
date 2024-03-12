@@ -3,10 +3,10 @@
 *@
 @{
 }
-<h4>Registration</h4>
+<h4 class=" text-center">Adding Role</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 d-flex justify-content-center">
         <form asp-action="Add" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -14,7 +14,7 @@
                 <input type="text" name="name" id="name" class="form-control" value="@Model?.Name" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary" />
+                <input type="submit" value="Add" class="btn btn-dark" />
             </div>
         </form>
     </div>
