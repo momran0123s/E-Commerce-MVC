@@ -9,9 +9,11 @@ namespace E_Commerce.Models
         public int Id { get; set; }
         public string ProductName { get; set; }
         public string Description { get; set; }
+
         public int Quantity { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
+        public string Image { get; set; }
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         public virtual Category? Category { get; set; }
