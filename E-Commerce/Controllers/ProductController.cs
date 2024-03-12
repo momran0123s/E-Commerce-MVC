@@ -38,7 +38,7 @@ namespace E_Commerce.Controllers
                 Product product = db.Products.FirstOrDefault(p => p.Id == id);
                 if (product == null)
                 {
-                    return NotFound(); // Product not found
+                    return NotFound(); 
                 }
 
                 Cart cart = db.Carts.FirstOrDefault(c => c.UserId == user.Id);
@@ -52,17 +52,17 @@ namespace E_Commerce.Controllers
                     db.SaveChanges();
                 }
 
-                // Check if the product is already in the cart
+                
                 CartItems existingCartItem = db.CartItems.FirstOrDefault(ci => ci.CartId == cart.Id && ci.ProductId == id);
                 if (existingCartItem != null)
                 {
-                    // Update quantity or any other relevant properties
-                    existingCartItem.ProductQuantity++; // For example, increment quantity
-                    existingCartItem.TotalPrice += product.Price; // Adjust total price
+                    
+                    existingCartItem.ProductQuantity++; 
+                    existingCartItem.TotalPrice += product.Price; 
                 }
                 else
                 {
-                    // Create a new CartItem if it doesn't exist
+                    
                     CartItems cartItems = new CartItems()
                     {
                         CartId = cart.Id,
